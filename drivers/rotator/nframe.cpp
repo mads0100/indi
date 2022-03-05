@@ -55,8 +55,8 @@ bool nFrameRotator::initProperties()
     IUFillSwitchVector(&SteppingModeSP, SteppingModeS, 3, getDeviceName(), "STEPPING_MODE", "Mode",
                        STEPPING_TAB, IP_RW, ISR_1OFMANY, 0, IPS_OK);
 
-    // Stepping Phase
-    IUFillNumber(&SteppingPhaseN[0], "PHASES", "Wiring", "%.f", 0, 2, 1, 0);
+    // Stepping Phase there are 5 states... 2 is normal (motor twoards the scope) 5 is reversed
+    IUFillNumber(&SteppingPhaseN[0], "PHASES", "Wiring", "%.f", 0, 5, 1, 0);
     IUFillNumberVector(&SteppingPhaseNP, SteppingPhaseN, 1, getDeviceName(), "STEPPING_PHASE", "Phase",
                        STEPPING_TAB, IP_RW, 0, IPS_OK);
 
@@ -76,7 +76,8 @@ bool nFrameRotator::initProperties()
     //    IUFillSwitch(&CoilStatusS[COIL_ENERGIZED_ON], "COIL_ENERGIZED_OFF", "Energized", ISS_OFF);
     IUFillSwitchVector(&CoilStatusSP, CoilStatusS, 2, getDeviceName(), "COIL_MODE", "Coil After Move",
                        OPTIONS_TAB, IP_RW, ISR_1OFMANY, 0, IPS_OK);
-    IUFillNumber(&SettingN[PARAM_STEPS_DEGREE], "PARAM_STEPS_DEGREE", "Steps/Degree", "%.2f", 1., 10000., 500., 1000.);
+    // steps per degree is 55 steps/degree
+    IUFillNumber(&SettingN[PARAM_STEPS_DEGREE], "PARAM_STEPS_DEGREE", "Steps/Degree", "%.2f", 1., 10000., 500., 55.);
     IUFillNumberVector(&SettingNP, SettingN, 1, getDeviceName(), "ROTATOR_SETTINGS", "Parameters", SETTINGS_TAB, IP_RW, 0,
                        IPS_OK);
     // Rotator Ticks
